@@ -8,7 +8,7 @@ script/source = "extends CharacterBody2D
 var input_dir = Vector2.ZERO
 var velocidad = 150  # Aumenté significativamente la velocidad (píxeles/segundo)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	Movimiento()
 	Detener_animacion()
 

@@ -26,7 +26,7 @@ func Localizar_objetivo():
 	agente_navegacion.target_position = objetivo.global_position
 	pass
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	Navegar_y_Actualizar_objetivo()
 	pass
 
