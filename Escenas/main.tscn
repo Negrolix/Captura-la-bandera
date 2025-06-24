@@ -1,0 +1,175 @@
+[gd_scene load_steps=24 format=3 uid="uid://bppswo8dnguj3"]
+
+[ext_resource type="Script" uid="uid://dul262u10dss8" path="res://Scripts/main.gd" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://bi36vq522qghg" path="res://Recursos/BackGround.png" id="2_272bh"]
+[ext_resource type="PackedScene" uid="uid://creiih4626d05" path="res://Escenas/bandera.tscn" id="4_lquwl"]
+[ext_resource type="PackedScene" uid="uid://ctors4lc7k3d7" path="res://Escenas/enemigo.tscn" id="5_7mycd"]
+[ext_resource type="PackedScene" uid="uid://bnga7wtt1wqgo" path="res://Escenas/menu.tscn" id="6_7mycd"]
+[ext_resource type="PackedScene" uid="uid://cy4nobffx4crw" path="res://Escenas/personaje.tscn" id="6_272bh"]
+[ext_resource type="AudioStream" uid="uid://c4k8ory34p5bj" path="res://Sonidos/restaurant-sounds-22945.mp3" id="7_272bh"]
+[ext_resource type="AudioStream" uid="uid://k635h6v1gq7s" path="res://Sonidos/eat-323883.mp3" id="8_5vw27"]
+[ext_resource type="AudioStream" uid="uid://d1n2r5pk8w68s" path="res://Sonidos/the-return-of-the-8-bit-era-301292.mp3" id="8_kek77"]
+[ext_resource type="AudioStream" uid="uid://d2h2lx7m5kk1x" path="res://Sonidos/Crying Man Sound effect _ Funny sound effect _ Copyright free sound effects-yt.savetube.me.mp3" id="10_4c57u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5vw27"]
+size = Vector2(517.958, 82.4926)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_272bh"]
+size = Vector2(205.566, 84.5381)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kek77"]
+size = Vector2(258.554, 65.4487)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7mycd"]
+size = Vector2(424.751, 60.6764)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ycdy4"]
+size = Vector2(90.4389, 28.6338)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vivmo"]
+size = Vector2(132.042, 27.2703)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2cqfq"]
+size = Vector2(136.618, 49.0866)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_efxa6"]
+size = Vector2(368.359, 77.7204)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w48qg"]
+size = Vector2(111.082, 264.977)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yaehf"]
+size = Vector2(233.656, 49.0866)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_074og"]
+size = Vector2(469.865, 47.723)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cegan"]
+size = Vector2(287.702, 76.7847)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_7mycd"]
+vertices = PackedVector2Array(274.102, 480.078, 181.711, 480.898, 183.344, 457, 271, 457, 275.109, 390.898, 271, 375, 474, 375, 476.102, 393, 529.273, 277, 819, 277, 819, 297, 715, 297, 715, 341, 818, 341, 818, 350, 485, 350, 485, 393, 474, 303, 271, 303, 271, 262, 462.977, 262, 465.438, 263.641, 476.773, 248.32, 476, 247.742, 476, 241, 528.273, 241, 476, 250.633, 476, 257.992, 473.008, 259.578, 472.211, 262, 468.508, 262)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 0, 3, 5), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(12, 13, 14, 15), PackedInt32Array(15, 16, 7, 6, 17), PackedInt32Array(17, 18, 19, 20, 21), PackedInt32Array(22, 23, 24, 25, 8), PackedInt32Array(26, 22, 8, 27), PackedInt32Array(8, 11, 12, 15, 17), PackedInt32Array(28, 27, 8, 17, 29), PackedInt32Array(29, 17, 21, 30)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(174, 447, 261, 447, 261, 365, 464, 365, 464, 313, 261, 313, 261, 252, 465, 252, 466, 252, 466, 252, 466, 231, 538, 231, 539, 267, 829, 267, 829, 307, 725, 307, 725, 331, 828, 331, 828, 360, 498, 360, 495, 360, 495, 403, 476, 403, 285, 401, 284, 490, 171, 491)])
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_ig7tw")
+
+[node name="BackGround" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(551, 349)
+scale = Vector2(0.783203, 0.733398)
+texture = ExtResource("2_272bh")
+
+[node name="Pared de afuera" type="StaticBody2D" parent="BackGround"]
+position = Vector2(-748.848, -482.003)
+scale = Vector2(1.27681, 1.36352)
+
+[node name="Pared roja" type="CollisionShape2D" parent="BackGround/Pared de afuera"]
+position = Vector2(723.667, 440.25)
+scale = Vector2(0.783203, 0.733398)
+shape = SubResource("RectangleShape2D_5vw27")
+
+[node name="Pared Ladrillos" type="CollisionShape2D" parent="BackGround/Pared de afuera"]
+position = Vector2(403.5, 440)
+scale = Vector2(0.783203, 0.733398)
+shape = SubResource("RectangleShape2D_272bh")
+
+[node name="Artefactos entrada" type="StaticBody2D" parent="BackGround"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackGround/Artefactos entrada"]
+position = Vector2(-242.274, -12.9534)
+shape = SubResource("RectangleShape2D_kek77")
+
+[node name="Mesas" type="StaticBody2D" parent="BackGround"]
+
+[node name="Mesas que dan a la puerta" type="CollisionShape2D" parent="BackGround/Mesas"]
+position = Vector2(143.854, 47.3822)
+shape = SubResource("RectangleShape2D_7mycd")
+
+[node name="Mesa del medio punta Izquierda" type="CollisionShape2D" parent="BackGround/Mesas"]
+position = Vector2(24.2593, -40.9055)
+shape = SubResource("RectangleShape2D_ycdy4")
+
+[node name="Mesa del medio centro" type="CollisionShape2D" parent="BackGround/Mesas"]
+position = Vector2(160.878, -40.2238)
+shape = SubResource("RectangleShape2D_ycdy4")
+
+[node name="Mesas del medio punta Derecha" type="CollisionShape2D" parent="BackGround/Mesas"]
+position = Vector2(290.208, -40.9055)
+shape = SubResource("RectangleShape2D_vivmo")
+
+[node name="Mesa arriba derecha" type="CollisionShape2D" parent="BackGround/Mesas"]
+position = Vector2(287.92, -137.715)
+shape = SubResource("RectangleShape2D_2cqfq")
+
+[node name="Cocina" type="StaticBody2D" parent="BackGround"]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="BackGround/Cocina"]
+position = Vector2(-297.816, -171.803)
+shape = SubResource("RectangleShape2D_efxa6")
+
+[node name="Lado izquierdo" type="StaticBody2D" parent="BackGround"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackGround/Lado izquierdo"]
+position = Vector2(-427.092, -1.13586)
+shape = SubResource("RectangleShape2D_w48qg")
+
+[node name="Mostrador" type="StaticBody2D" parent="BackGround"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackGround/Mostrador"]
+position = Vector2(102.783, -137.715)
+shape = SubResource("RectangleShape2D_yaehf")
+
+[node name="Pared de fondo" type="StaticBody2D" parent="BackGround"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackGround/Pared de fondo"]
+position = Vector2(121.297, -186.12)
+shape = SubResource("RectangleShape2D_074og")
+
+[node name="Pared derecha" type="StaticBody2D" parent="BackGround"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackGround/Pared derecha"]
+position = Vector2(394.534, -66.1306)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_cegan")
+
+[node name="Personaje" parent="." instance=ExtResource("6_272bh")]
+position = Vector2(473, 463)
+
+[node name="Enemigo" parent="." instance=ExtResource("5_7mycd")]
+position = Vector2(271, 456)
+nodo_objetivo = NodePath("../Bandera")
+
+[node name="Bandera" parent="." instance=ExtResource("4_lquwl")]
+position = Vector2(295, 265)
+scale = Vector2(0.0974479, 0.0818229)
+
+[node name="Menu" parent="." instance=ExtResource("6_7mycd")]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+visible = false
+position = Vector2(-6.10352e-05, -3.05176e-05)
+navigation_polygon = SubResource("NavigationPolygon_7mycd")
+
+[node name="Ambiente" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_272bh")
+volume_db = -6.748
+
+[node name="The-return-of-the-8-bit-era-301292" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_kek77")
+volume_db = -9.455
+
+[node name="Eat-323883" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_5vw27")
+
+[node name="CryingManSoundEffectFunnySoundEffectCopyrightFreeSoundEffects-yt_savetube_me" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_4c57u")
+
+[connection signal="gana" from="Bandera" to="." method="_on_bandera_gana"]
+[connection signal="gana" from="Bandera" to="Menu" method="_on_bandera_gana"]
+[connection signal="pierde" from="Bandera" to="." method="_on_bandera_pierde"]
+[connection signal="pierde" from="Bandera" to="Menu" method="_on_bandera_pierde"]
+[connection signal="jugar" from="Menu" to="." method="_on_menu_jugar"]
+[connection signal="rejugar" from="Menu" to="." method="_on_menu_rejugar"]
+[connection signal="salir" from="Menu" to="." method="_on_menu_salir"]

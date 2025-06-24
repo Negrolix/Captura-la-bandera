@@ -1,0 +1,170 @@
+[gd_scene load_steps=10 format=3 uid="uid://cy4nobffx4crw"]
+
+[ext_resource type="Texture2D" uid="uid://ntj3ci4kjkwf" path="res://Recursos/Gordo bueno sprite sheet.png" id="1_4e5bt"]
+
+[sub_resource type="GDScript" id="GDScript_o8nq2"]
+script/source = "extends CharacterBody2D
+
+var input_dir = Vector2.ZERO
+var velocidad = 150  # Aumenté significativamente la velocidad (píxeles/segundo)
+
+func _physics_process(delta):
+	Movimiento()
+	Detener_animacion()
+
+func Movimiento():
+	Mover_arriba()
+	Mover_abajo()
+	Mover_izquierda()
+	Mover_derecha()
+	Mover_en_diagonal()
+	pass
+
+func Mover_arriba():
+	if Input.is_action_pressed(\"ui_up\"):
+		input_dir.y -= 1
+		$AnimationPlayer.play(\"Arriba\")
+	pass
+
+func Mover_abajo():
+	if Input.is_action_pressed(\"ui_down\"):
+		input_dir.y += 1
+		$AnimationPlayer.play(\"Abajo\")
+	pass
+
+func Mover_izquierda():
+	if Input.is_action_pressed(\"ui_left\"):
+		input_dir.x -= 1
+		$AnimationPlayer.play(\"Izquierda\")
+	pass
+
+func Mover_derecha():
+	if Input.is_action_pressed(\"ui_right\"):
+		input_dir.x += 1
+		$AnimationPlayer.play(\"Derecha\")
+	pass
+
+func Mover_en_diagonal():
+	input_dir = input_dir.normalized()
+	velocity = input_dir * velocidad
+	pass
+
+func Detener_animacion():
+	if input_dir == Vector2.ZERO:
+		$AnimationPlayer.stop()
+	else:
+		move_and_slide()
+	pass
+"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4e5bt"]
+radius = 8.0
+
+[sub_resource type="Animation" id="Animation_ts6aa"]
+resource_name = "Abajo"
+length = 0.7
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_vbipx"]
+resource_name = "Arriba"
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15]
+}
+
+[sub_resource type="Animation" id="Animation_bwrhs"]
+resource_name = "Derecha"
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_fmhpg"]
+resource_name = "Izquierda"
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_xhu6d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_123lt"]
+_data = {
+&"Abajo": SubResource("Animation_ts6aa"),
+&"Arriba": SubResource("Animation_vbipx"),
+&"Derecha": SubResource("Animation_bwrhs"),
+&"Izquierda": SubResource("Animation_fmhpg"),
+&"RESET": SubResource("Animation_xhu6d")
+}
+
+[node name="Personaje" type="CharacterBody2D"]
+position = Vector2(536, 317)
+script = SubResource("GDScript_o8nq2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-6, 3)
+shape = SubResource("CapsuleShape2D_4e5bt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-4, 6)
+scale = Vector2(0.75, 0.793103)
+texture = ExtResource("1_4e5bt")
+hframes = 4
+vframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_123lt")
+}

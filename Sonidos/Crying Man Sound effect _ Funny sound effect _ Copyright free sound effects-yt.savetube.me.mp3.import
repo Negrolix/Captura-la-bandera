@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d2h2lx7m5kk1x"
+path="res://.godot/imported/Crying Man Sound effect _ Funny sound effect _ Copyright free sound effects-yt.savetube.me.mp3-9bca068eb54e3bfe874e5552470ef8e9.mp3str"
+
+[deps]
+
+source_file="res://Sonidos/Crying Man Sound effect _ Funny sound effect _ Copyright free sound effects-yt.savetube.me.mp3"
+dest_files=["res://.godot/imported/Crying Man Sound effect _ Funny sound effect _ Copyright free sound effects-yt.savetube.me.mp3-9bca068eb54e3bfe874e5552470ef8e9.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,181 @@
+[gd_scene load_steps=10 format=3 uid="uid://ctors4lc7k3d7"]
+
+[sub_resource type="GDScript" id="GDScript_bgres"]
+script/source = "extends CharacterBody2D
+
+@export var velocidad: float = 150.0
+@export var nodo_objetivo: NodePath  
+
+var objetivo: Sprite2D
+var agente_navegacion: NavigationAgent2D
+
+func _ready():
+	Establecer_camino()
+	call_deferred(\"Localizar_objetivo\")
+	pass
+
+func Establecer_camino():
+	objetivo = get_node(nodo_objetivo)
+	agente_navegacion = $NavigationAgent2D
+	agente_navegacion.path_desired_distance = 4.0
+	agente_navegacion.target_desired_distance = 4.0
+	pass
+
+func Localizar_objetivo():
+	await get_tree().physics_frame
+	agente_navegacion.target_position = objetivo.global_position
+	pass
+
+func _physics_process(delta):
+	Navegar_y_Actualizar_objetivo()
+	pass
+
+func Navegar_y_Actualizar_objetivo():
+	Navegar()
+	Actualizar_posicion_objetivo()
+	pass
+
+func Navegar():
+	var siguiente_posicion = agente_navegacion.get_next_path_position()
+	var direccion = (siguiente_posicion - global_position).normalized()
+	velocity = direccion * velocidad
+	move_and_slide()
+	pass
+
+func Actualizar_posicion_objetivo():
+	# Actualiza el destino cada cierto tiempo (ej: cada 0.3 segundos)
+	if Engine.get_frames_drawn() % 18 == 0:  # 60 FPS * 0.3 = 18 frames
+		agente_navegacion.target_position = objetivo.global_position
+	pass
+"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wpdgs"]
+radius = 15.0
+height = 56.6667
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_s3efq"]
+load_path = "res://.godot/imported/Gordo malo sprite sheet.png-ebc8d22bc11f42125adc8557f21e774b.ctex"
+
+[sub_resource type="Animation" id="Animation_f755u"]
+resource_name = "Abajo"
+length = 0.8
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_v0yg6"]
+resource_name = "Arriba"
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15]
+}
+
+[sub_resource type="Animation" id="Animation_023w1"]
+resource_name = "Derecha"
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_mudjp"]
+resource_name = "Izquierda"
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_aoyxg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0mill"]
+_data = {
+&"Abajo": SubResource("Animation_f755u"),
+&"Arriba": SubResource("Animation_v0yg6"),
+&"Derecha": SubResource("Animation_023w1"),
+&"Izquierda": SubResource("Animation_mudjp"),
+&"RESET": SubResource("Animation_aoyxg")
+}
+
+[node name="Enemigo" type="CharacterBody2D"]
+position = Vector2(587, 331)
+scale = Vector2(0.6, 0.6)
+script = SubResource("GDScript_bgres")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_wpdgs")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1.91663, 3.22502)
+scale = Vector2(1.44271, 1.3181)
+texture = SubResource("CompressedTexture2D_s3efq")
+hframes = 4
+vframes = 4
+frame = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_0mill")
+}
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

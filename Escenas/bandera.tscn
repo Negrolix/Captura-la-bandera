@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://creiih4626d05"]
+
+[ext_resource type="Texture2D" uid="uid://sbvxoyld6f6f" path="res://Recursos/Hamburguesa.png" id="1_phhtn"]
+[ext_resource type="Script" uid="uid://cncv2lh77mq4x" path="res://Scripts/bandera.gd" id="2_phhtn"]
+
+[node name="Bandera" type="Sprite2D"]
+position = Vector2(0.93, -0.64)
+scale = Vector2(0.0791176, 0.0766667)
+texture = ExtResource("1_phhtn")
+script = ExtResource("2_phhtn")
+
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(3, 3)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+scale = Vector2(12, 12)
+build_mode = 1
+polygon = PackedVector2Array(-0.677613, 0.231884, 0.0245766, 0.956521, 0.726766, 0.231884, 0.0245766, -0.492753)
+one_way_collision_margin = 0.0
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
