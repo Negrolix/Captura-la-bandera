@@ -3,49 +3,57 @@
 [sub_resource type="GDScript" id="GDScript_bgres"]
 script/source = "extends CharacterBody2D
 
-@export var velocidad: float = 150.0
-@export var nodo_objetivo: NodePath  
-
-var objetivo: Sprite2D
-var agente_navegacion: NavigationAgent2D
-
-func _ready():
-	Establecer_camino()
-	call_deferred(\"Localizar_objetivo\")
-	pass
-
-func Establecer_camino():
-	objetivo = get_node(nodo_objetivo)
-	agente_navegacion = $NavigationAgent2D
-	agente_navegacion.path_desired_distance = 4.0
-	agente_navegacion.target_desired_distance = 4.0
-	pass
-
-func Localizar_objetivo():
-	await get_tree().physics_frame
-	agente_navegacion.target_position = objetivo.global_position
-	pass
+var input_dir = Vector2.ZERO
+var velocidad = 150  # Aumenté significativamente la velocidad (píxeles/segundo)
 
 func _physics_process(_delta):
-	Navegar_y_Actualizar_objetivo()
+	Movimiento()
+	Detener_animacion()
 	pass
 
-func Navegar_y_Actualizar_objetivo():
-	Navegar()
-	Actualizar_posicion_objetivo()
+func Movimiento():
+	input_dir = Vector2.ZERO
+	Mover_arriba()
+	Mover_abajo()
+	Mover_izquierda()
+	Mover_derecha()
+	Mover_en_diagonal()
 	pass
 
-func Navegar():
-	var siguiente_posicion = agente_navegacion.get_next_path_position()
-	var direccion = (siguiente_posicion - global_position).normalized()
-	velocity = direccion * velocidad
-	move_and_slide()
+func Mover_arriba():
+	if Input.is_action_pressed(\"Arriba\"):
+		input_dir.y -= 1
+		$AnimationPlayer.play(\"Arriba\")
 	pass
 
-func Actualizar_posicion_objetivo():
-	# Actualiza el destino cada cierto tiempo (ej: cada 0.3 segundos)
-	if Engine.get_frames_drawn() % 18 == 0:  # 60 FPS * 0.3 = 18 frames
-		agente_navegacion.target_position = objetivo.global_position
+func Mover_abajo():
+	if Input.is_action_pressed(\"Abajo\"):
+		input_dir.y += 1
+		$AnimationPlayer.play(\"Abajo\")
+	pass
+
+func Mover_izquierda():
+	if Input.is_action_pressed(\"Izquierda\"):
+		input_dir.x -= 1
+		$AnimationPlayer.play(\"Izquierda\")
+	pass
+
+func Mover_derecha():
+	if Input.is_action_pressed(\"Derecha\"):
+		input_dir.x += 1
+		$AnimationPlayer.play(\"Derecha\")
+	pass
+
+func Mover_en_diagonal():
+	input_dir = input_dir.normalized()
+	velocity = input_dir * velocidad
+	pass
+
+func Detener_animacion():
+	if input_dir == Vector2.ZERO:
+		$AnimationPlayer.stop()
+	else:
+		move_and_slide()
 	pass
 "
 

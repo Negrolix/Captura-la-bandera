@@ -139,7 +139,6 @@ position = Vector2(473, 463)
 
 [node name="Enemigo" parent="." instance=ExtResource("5_7mycd")]
 position = Vector2(271, 456)
-nodo_objetivo = NodePath("../Bandera")
 
 [node name="Bandera" parent="." instance=ExtResource("4_lquwl")]
 position = Vector2(295, 265)

@@ -11,8 +11,10 @@ var velocidad = 150  # Aumenté significativamente la velocidad (píxeles/segund
 func _physics_process(_delta):
 	Movimiento()
 	Detener_animacion()
+	pass
 
 func Movimiento():
+	input_dir = Vector2.ZERO
 	Mover_arriba()
 	Mover_abajo()
 	Mover_izquierda()

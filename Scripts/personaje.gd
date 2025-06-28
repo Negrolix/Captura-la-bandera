@@ -1,6 +1,6 @@
 extends CharacterBody2D
 var movimiento = Vector2()
-var velocidad = 3
+var velocidad = 100
 
 func _physics_process(delta):
 	if Input.is_action_pressed("ui_right"):
@@ -19,7 +19,7 @@ func _physics_process(delta):
 		movimiento.y = velocidad
 		$AnimationPlayer.play("Abajo")
 
-	if Input.is_action_just_released("ui_right") or Input.is_action_just_released("ui_left") or Input.is_action_just_released("ui_up") or Input.is_action_just_released("ui_down"):
+	if Input.is_action_just_released("Arriba") or Input.is_action_just_released("Abajo") or Input.is_action_just_released("Izquierda") or Input.is_action_just_released("Derecha"):
 		movimiento.x = 0
 		movimiento.y = 0
 		$AnimationPlayer.stop()
